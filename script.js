@@ -1,0 +1,114 @@
+var numberButtonsContainer = document.getElementsByClassName("button number");
+var operationButtonsContainer = document.getElementsByClassName("button operation");
+const resetButton = document.getElementById("reset-button");
+const resultButton = document.getElementById("result-button");
+const textPlaceholder = document.getElementById("text-placeholder");
+const symbolPlaceholder = document.getElementById("symbol-placeholder");
+const temporaryResultPlaceholder = document.getElementById("temporary-result-placeholder");
+
+const click1Audio = document.getElementById("click1");
+const click2Audio = document.getElementById("click2");
+
+for(var i = 0; i < numberButtonsContainer.length; i++) {
+	const id = numberButtonsContainer[i].id;
+
+	numberButtonsContainer[i].addEventListener("click", () => {
+		numberChoice(id);
+		playAudio();
+	});
+};
+
+for(var i = 0; i < operationButtonsContainer.length; i++) {
+	const id = operationButtonsContainer[i].id;
+	const innerHTML = operationButtonsContainer[i].innerHTML;
+
+	operationButtonsContainer[i].addEventListener("click", () => {
+		operationChoice(id, innerHTML);
+		playAudio();
+	});
+};
+
+resetButton.addEventListener("click", () => {resetAll(); playAudio();});
+resultButton.addEventListener("click", () => {showResult(); playAudio();});
+
+let operation = null;
+let num1 = 0;
+let result = null;
+let replace = false;
+
+function numberChoice(number) {
+	if(replace) {
+		textPlaceholder.innerHTML = number;
+		replace = false;
+	} else {
+		textPlaceholder.innerHTML = (textPlaceholder.innerHTML === '0') ? number : textPlaceholder.innerHTML + number;
+	}
+}
+
+function operationChoice(idElement, symbolText) {
+	console.log(operation);
+	if(operation){
+		console.log("You have calculated something previously");
+		calculate();
+		temporaryResultPlaceholder.innerHTML = result;
+		console.log("Temporary result : " + result);
+	} else {
+		console.log("You have not calculated something previously");
+		num1 = Number(textPlaceholder.innerHTML);
+		temporaryResultPlaceholder.innerHTML = num1;
+	}
+	symbolPlaceholder.innerHTML = symbolText;
+	operation = idElement;
+	replace = true;
+}
+
+function showResult() {
+	if(operation){
+		calculate();
+		console.log('The result is ' + result);
+		textPlaceholder.innerHTML = result;
+		temporaryResultPlaceholder.innerHTML = '';
+		symbolPlaceholder.innerHTML = '=';
+		num1 = null;
+		operation = null;
+	} else {
+		console.log('What are you doing?');
+	}
+}
+
+function calculate() {
+	if(operation === 'divide') {
+		result = num1 / Number(textPlaceholder.innerHTML);
+		console.log(symbolPlaceholder);
+	} else if (operation === 'multiply') {
+		result = num1 * Number(textPlaceholder.innerHTML);
+	}	else if (operation === 'minus') {
+		result = num1 - Number(textPlaceholder.innerHTML);
+	} else if (operation === 'plus') {
+		result = num1 + Number(textPlaceholder.innerHTML);
+	}
+	result = Math.round(result * 100) / 100;
+	num1 = result;
+}
+
+function resetAll() {
+	operation = null;
+	num1 = 0;
+	result = null;
+	replace = false;
+	textPlaceholder.innerHTML = '0';
+	temporaryResultPlaceholder.innerHTML = '';
+	symbolPlaceholder.innerHTML = '';
+}
+
+function playAudio() {
+	if(click1Audio.paused && click2Audio.paused) {
+		click1Audio.play();
+	} else if (!click1Audio.paused && click2Audio.paused) {
+		click2Audio.play();
+	} else {
+		click1Audio.pause();
+		click1Audio.currentTime = 0;
+		click1Audio.play();
+	}
+}

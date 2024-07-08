@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@700&display=swap');
+
+*{
+	margin: 0;
+	padding: 0;
+	font-family: "Lexend", sans-serif;
+	font-size: 36px;
+	font-weight: 700;
+}
+
+body{
+	background-color: #f9f9e0;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+p{
+}
+
+.container{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	background-color: #8ACDD7;
+	background-image: linear-gradient(to right, #8ACDD7, #5fb2be);
+	border-radius: 32px;
+	width: 400px;
+	height: 550px;
+	box-shadow: 0 15px #3a9aa9, 0 15px 15px #3a9aa9, 5px 15px 15px #3a9aa9;
+}
+
+.container .screen-container{
+	display: flex;
+	align-items: center;
+	justify-content: right;
+	flex-direction: column;
+	width: 325px;
+	height: 110px;
+	background-color: #F9F9E0;
+	margin-bottom: 20px;
+	box-shadow: 0 10px inset #3a9aa9, 0 10px 4px #5da7b3 inset;
+}
+
+.container .symbol-and-text-container {
+	display: flex;
+	align-items: end;
+	width: 325px;
+	height: 50px;
+	margin-top: 20px;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+.container .symbol-placeholder {
+	color: #d1d1ba;
+	width: 50px;
+	font-size: 40px;
+	padding-left: 20px;
+}
+
+.container .text-placeholder {
+	width: 235px;
+	text-align: right;
+	font-size: 40px;
+	padding-right: 20px;
+	text-overflow: ellipsis;
+}
+
+.container .temporary-result-placeholder {
+	color: #d1d1ba;
+	font-size: 24px;
+	width: 285px;
+	text-align: right;
+	padding: 0 20px;
+}
+
+.container .button-container{
+	display: grid;
+	grid-template-columns: 70px 70px 70px 70px;
+	grid-gap: 15px;
+}
+
+.container .button-shadow{
+	position: relative;
+	background-color: #ff73ab;
+	width: 70px;
+	height: 70px;
+	border-radius: 50%;
+	box-shadow: 5px 5px 15px #3a9aa9, 2px 2px 5px #3a9aa9;
+}
+
+.container .button-stroke{
+	position: absolute;
+	top: -5px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 70px;
+	height: 70px;
+	border-radius: 50%;
+	background-color: #ffc0d9;
+	background-image: linear-gradient(#ffc0d9, #ff9cc3);
+	transition: all 80ms;
+}
+
+.container .button-stroke:active{
+	transform: translateY(5px);
+}
+
+.container button{
+	background-color: #FFC0D9;
+	background-image: linear-gradient(#ff90bc, #FFC0D9);
+	width: 65px;
+	height: 65px;
+	border: none;
+	border-radius: 50%;
+	color: #F9F9E0;
+}
+
+.container .operation-symbol-text{
+	margin-bottom: 7px;
+}
+
+.credit{
+	position: fixed;
+	font-size: 16px;
+	color: #BDAE8F;
+	bottom: 10px;
+	left: 10px;
+}
